@@ -1,0 +1,234 @@
+__STATS__:__________
+pStrength (Strength):8
+pDexterity (Dexterity):8
+pConstitution (Constitution):8
+pIntelligence (Intelligence):8
+pWisdom (Wisdom):8
+pCharisma (Charisma):8
+Strength (Total Str):{max(json.get(MagicItems,"sStr"),pStrength+json.get(MagicItems,"bStr"))}
+Dexterity (Total Dex):{max(json.get(MagicItems,"sDex"),pDexterity+json.get(MagicItems,"bDex"))}
+Constitution (Total Con):{max(json.get(MagicItems,"sCon"),pConstitution+json.get(MagicItems,"bCon"))}
+Intelligence (Total Int):{max(json.get(MagicItems,"sInt"),pIntelligence+json.get(MagicItems,"bInt"))}
+Wisdom (Total Wis):{max(json.get(MagicItems,"sWis"),pWisdom+json.get(MagicItems,"bWis"))}
+Charisma (Total Cha):{max(json.get(MagicItems,"sCha"),pCharisma+json.get(MagicItems,"bCha"))}
+Str:{floor((Strength - 10)/2)}
+Dex:{floor((Dexterity - 10)/2)}
+Con:{floor((Constitution - 10)/2)}
+Int:{floor((Intelligence - 10)/2)}
+Wis:{floor((Wisdom - 10)/2)}
+Cha:{floor((Charisma - 10)/2)}
+__CHARACTER__:__________
+Level (Character Level):{sum(json.get(LClass,"LArt"),json.get(LClass,"LBrb"),json.get(LClass,"LBlh"),json.get(LClass,"LBrd"),json.get(LClass,"LClc"),json.get(LClass,"LDrd"),json.get(LClass,"LFtr"),json.get(LClass,"LMnk"),json.get(LClass,"LPdn"),json.get(LClass,"LRgr"),json.get(LClass,"LRog"),json.get(LClass,"LScr"),json.get(LClass,"LWlk"),json.get(LClass,"LWiz"))}
+LClass (Class Levels):{"LArt":0,"LBrb":0,"LBrd":0,"LClc":0,"LDrd":0,"LFtr":0,"LMnk":0,"LPdn":0,"LRgr":0,"LRog":0,"LScr":0,"LWlk":0,"LWiz":0}
+Proficiency:{ceiling(Level/4)+1}
+#Alignment:Neutral
+Race:None
+DraconicHeritage
+Deity:None
+Background
+Dragonmark:{"Detection":0,"Finding":0,"Handling":0,"Healing":0,"Hospitality":0,"Making":0,"Passage":0,"Scribing":0,"Sentinel":0,"Shadow":0,"Storm":0,"Warding":0}
+Languages
+Note
+Initiative:{Dex+if(json.get(Feats,"Alert")==1,5,0)+json.get(MagicItems,"bInit")}
+InitiativeAdvantage:{if(json.get(LClass,"LBrb")>6,1,0)}
+__HEALTH__:__________
+HP:0
+MaxHP:{RolledMaxHP+(Con*Level)+AidHP-HPDrain+if(json.get(ScrOrigin,"DrcB")==1,json.get(LClass,"LScr"),0)+if(Race=="Hill Dwarf",Level,0)+if(json.get(Feats,"Tough")==1,(2*Level),0)}
+RolledMaxHP:0
+TempHP:0
+AidHP:0
+HPDrain:0
+Exhaustion:0
+DeathSaves:{"Successes":0,"Failures":0}
+HitDice:{"1d12":0,"1d10":0,"1d8":0,"1d6":0}
+MaxHitDice:{"1d12":0,"1d10":0,"1d8":0,"1d6":0}
+Speed:{30+if(Race=="Hill Dwarf",-5,0)+if(Race=="Mountain Dwarf",-5,0)+if(Race=="Wood Elf",5,0)+if(Race=="Lightfoot Halfling",-5,0)+if(Race=="Stout Halfling",-5,0)+if(Race=="Forest Gnome",-5,0)+if(Race=="Rock Gnome",-5,0)+json.get(MagicItems,"bSpeed")+if(json.get(LClass,"LBrb")>4,10,0)+if(json.get(LClass,"LMnk")>1,10,0)+if(json.get(LClass,"LMnk")>0,(5*ceiling((json.get(LClass,"LMnk")-5)/4)),0)+if(json.get(Feats,"Mobile")==1,10,0)+" ft."}
+SpeedSpecial:{if(json.get(LClass,"LMnk")>1," across vertical surfaces & liquid.","")+if(json.get(LClass,"LClc")>=17,if(json.get(ClcDomain,"Tmpt")==1," + flying while not underground or indoors",""),"")}{if(json.get(RogArchetype,"Thif")==1," + climbing","")}
+Vision:{if (json.get(EInvocations,"DSt")==1,"Magical Darkvision 120 ft.",if(or(Race=="Dwarf",Race=="Hill Dwarf",Race=="Mountain Dwarf",Race=="Elf",Race=="High Elf",Race=="Wood Elf",Race=="Gnome",Race=="Forest Gnome",Race=="Rock Gnome",Race=="Half-Elf",Race=="Half-Orc",Race=="Tiefling"),"Darkvision 60 ft.",if(Race=="Drow","Darkvision 120 ft.","")))}{if(json.get(LClass,"LRog")>=14,", Blindsense 10 ft.","")}{if(json.get(ThirdEye,"Choice")=="Darkvision"," Darkvision 60 ft. ","")}{if(json.get(ThirdEye,"Choice")=="Ethereal Sight"," See Ethereal Plane 60 ft. ","")}{if(json.get(ThirdEye,"Choice")=="See Invisibility"," See Invisibility 10 ft. ","")}
+__DAMAGE MODIFIERS__:__________
+Resistance:{if(json.get(LClass,"LBrb")>=1,if(getState("Rage")==1,if(json.get(TotemSpirit,"Bear1")==1," All damage except Psychic ","Bludgeoning Piercing Slashing "),""),"")}{if(json.get(LClass,"LClc")>=17,if(json.get(ClcDomain,"War")==1," (Bludgeoning Piercing Slashing from non-magical weapons) ",""),"")}{if(json.get(LClass,"LWlk")>=10,if(json.get(WlkPatron,"GtO1")==1," Psychic ",""),"")}{if(json.get(WizTradition,"Abjr")==1,if(json.get(LClass,"LWiz")>=14,", Spell Damage ",""),"")}{if(json.get(WizTradition,"Ncrm")==1,if(json.get(LClass,"LWiz")>=10," Necrotic ",""),"")}{if(or(Race=="Hill Dwarf",Race=="Mountain Dwarf",Race=="Stout Halfling")," Poison ","")}{if(or(DraconicHeritage=="Black",DraconicHeritage=="Copper")," Acid ","")}{if(or(DraconicHeritage=="Blue",DraconicHeritage=="Bronze")," Lightning ","")}{if(or(DraconicHeritage=="Brass",DraconicHeritage=="Red",DraconicHeritage=="Gold")," Fire ","")}{if(DraconicHeritage=="Green"," Poison ","")}{if(or(DraconicHeritage=="Silver",DraconicHeritage=="White")," Cold ","")}{if(Race=="Tiefling"," Fire ","")}{json.get(MagicItems,"iResist ")}{if(json.get(Feats,"DungeonDelver")==1," Trap Damage ","")}
+Vulnerability:{" "+json.get(MagicItems,"iVuln")+" "}
+Immunity:{if(json.get(LClass,"LDrd")>=10,if(json.get(DrdCircle,"Land")==1,"Poison, Disease,",""),"")}{if(json.get(LClass,"LMnk")>=10," Disease, Poison ","")}{if(json.get(LClass,"LPdn")>=3," Disease","")}{if(json.get(LClass,"LPdn")>=10," Frightened","")}{json.get(MagicItems,"iImmune")}
+CritRange:20
+CritRangeStorage:0
+CritMultiplier:{1+if(Race=="Half-Orc",1,0)+max(floor((json.get(LClass,"LBrb")-5)/4),0)}
+__EQUIPMENT__:__________
+AC:{json.get(json.get(Armor,json.get(Armor,0)),"BaseAC")+json.get(json.get(Armor,json.get(Armor,0)),"MagicBonus")+min(if(json.get(json.get(Armor,json.get(Armor,0)),"DexMax")==0,0,Dex),json.get(json.get(Armor,json.get(Armor,0)),"DexMax"))+if(json.get(json.get(Shield,json.get(Shield,0)),"Name")=="None",0,2+json.get(json.get(Shield,json.get(Shield,0)),"MagicBonus"))+if(json.get(json.get(Armor,json.get(Armor,0)),"Type")=="None",if(json.get(LClass,"LBrb")>0,Con,0),0)+if(json.get(json.get(Armor,json.get(Armor,0)),"Type")=="None",if(json.get(LClass,"LMnk")>0,Wis,0),0)-if(json.get(json.get(Armor,json.get(Armor,0)),"Type")=="None",if(json.get(LClass,"LBrb")>0,if(json.get(LClass,"LMnk")>0,min(Con,Wis),0),0),0)+if(json.get(FightingStyle,"Defn")==1,if(json.get(json.get(Armor,json.get(Armor,0)),"Type")=="None",0,1),0)+if(json.get(json.get(Armor,json.get(Armor,0)),"Type")=="None",if(json.get(ScrOrigin,"DrcB")==1,3,0),0)+json.get(MagicItems,"bAC")+if(json.get(Feats,"DualWielder")==1,if(json.get(Weapon,0)>2,if(json.get(Weapon,1)>2,1,0),0),0)+if(json.get(Feats,"MediumArmorMaster")==1,if(Dex>2,if(json.get(json.get(Armor,json.get(Armor,0)),"DexMax")==2,1,0),0),0)}
+Armor:[1,{"Name":"None","MagicBonus":0,"Type":"None","BaseAC":10,"DexMax":99,"StrReq":0,"StealthDis":0}]
+Shield:[1,{"Name":"None","MagicBonus":0}]
+Weapon:[2,2,{"Name":"Unarmed","MagicBonus":0,"Type":"Unarmed","DamageDie":"1d1","DamageType":"Bludgeoning","SecDamageDie":0,"SecDamageType":"None","Range":"","CritRange":0,"CritMultiplier":0,"SpecialAbility":"","Props":""}]
+MagicItems:{"bStr":0,"bDex":0,"bCon":0,"bInt":0,"bWis":0,"bCha":0,"bFam":0,"bPwr":0,"bSny":0,"sStr":0,"sDex":0,"sCon":0,"sInt":0,"sWis":0,"sCha":0,"sFam":0,"sPwr":0,"sSny":0,"bAC":0,"iResist":"","iVuln":"","iImmune":"","bInit":0,"bSpeed":0}
+Attuned:[0,0,0]
+__CONSUMABLES__:__________
+*Inspiration:1
+Ammo:0
+HealersKit:0
+HealingPotion:0
+GreaterHealingPotion:0
+__SKILLS__:__________
+Saves:{"sStr":0,"sDex":0,"sCon":0,"sInt":0,"sWis":0,"sCha":0}
+Skills:{"Acb":0,"AnH":0,"Arc":0,"Ath":0,"Dcp":0,"Hst":0,"Ins":0,"Imd":0,"Inv":0,"Med":0,"Ntr":0,"Pcp":0,"Pfm":0,"Prs":0,"Rlg":0,"SoH":0,"Stl":0,"Srv":0}
+Tools:{"ArT":0,"DsK":0,"FgK":0,"GmS":0,"HbK":0,"MsI":0,"NgT":0,"PsK":0,"TvT":0,"VLd":0,"VWt":0}
+__SPELLS__:__________
+LSpellSlots:{json.get(LClass,"LBrd")+json.get(LClass,"LClc")+json.get(LClass,"LDrd")+json.get(LClass,"LScr")+json.get(LClass,"LWiz")+ceiling((if(json.get(LClass,"LPdn")>1,json.get(LClass,"LPdn"),0)+if(json.get(LClass,"LRgr")>1,json.get(LClass,"LRgr"),0))/2)+ceiling((if(json.get(LClass,"LFtr")>2,if(json.get(FtrArchetype,"ErKn")==1,json.get(LClass,"LFtr"),0),0)+if(json.get(LClass,"LRog")>1,if(json.get(RogArchetype,"ATrk")==1,json.get(LClass,"LRog"),0),0))/3)}
+SpellSlots:{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"W":0}
+MaxSpellSlots:{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"W":0}
+Concentration
+__DISPLAY DO NOT EDIT__:__________
+*dLevel (_):{Race}{if(json.get(LClass,"LBrb")>0," | Barbarian-","")}{if(json.get(LClass,"LBrb")>0,json.get(LClass,"LBrb"),"")}{if(json.get(LClass,"LBrd")>0," | Bard-","")}{if(json.get(LClass,"LBrd")>0,json.get(LClass,"LBrd"),"")}{if(json.get(LClass,"LClc")>0," | Cleric-","")}{if(json.get(LClass,"LClc")>0,json.get(LClass,"LClc"),"")}{if(json.get(LClass,"LDrd")>0," | Druid-","")}{if(json.get(LClass,"LDrd")>0,json.get(LClass,"LDrd"),"")}{if(json.get(LClass,"LFtr")>0," | Fighter-","")}{if(json.get(LClass,"LFtr")>0,json.get(LClass,"LFtr"),"")}{if(json.get(LClass,"LMnk")>0," | Monk-","")}{if(json.get(LClass,"LMnk")>0,json.get(LClass,"LMnk"),"")}{if(json.get(LClass,"LPdn")>0," | Paladin-","")}{if(json.get(LClass,"LPdn")>0,json.get(LClass,"LPdn"),"")}{if(json.get(LClass,"LRgr")>0," | Ranger-","")}{if(json.get(LClass,"LRgr")>0,json.get(LClass,"LRgr"),"")}{if(json.get(LClass,"LRog")>0," | Rogue-","")}{if(json.get(LClass,"LRog")>0,json.get(LClass,"LRog"),"")}{if(json.get(LClass,"LScr")>0," | Sorcerer-","")}{if(json.get(LClass,"LScr")>0,json.get(LClass,"LScr"),"")}{if(json.get(LClass,"LWlk")>0," | Warlock-","")}{if(json.get(LClass,"LWlk")>0,json.get(LClass,"LWlk"),"")}{if(json.get(LClass,"LWiz")>0," | Wizard-","")}{if(json.get(LClass,"LWiz")>0,json.get(LClass,"LWiz"),"")} |
+*dHP (HP):{HP}
+*dMaxHP (MaxHP):{MaxHP}
+*dTemHP (TempHP):{if(TempHP>0,TempHP,"")}
+*dArcaneWard (Arcane Ward):{if(json.get(ArcaneWard,"Active")==1,json.get(ArcaneWard,"HP"),"")}
+*dHitDice (HitDice):{if(json.get(HitDice,"1d12")>0," | 1d12: ","")}{if(json.get(HitDice,"1d12")>0,json.get(HitDice,"1d12"),"")}{if(json.get(HitDice,"1d10")>0," | 1d10: ","")}{if(json.get(HitDice,"1d10")>0,json.get(HitDice,"1d10"),"")}{if(json.get(HitDice,"1d8")>0," | 1d8: ","")}{if(json.get(HitDice,"1d8")>0,json.get(HitDice,"1d8"),"")}{if(json.get(HitDice,"1d6")>0," | 1d6: ","")}{if(json.get(HitDice,"1d6")>0,json.get(HitDice,"1d6"),"")} |
+*dMaxHitDice (MaxHitDice):{if(json.get(MaxHitDice,"1d12")>0," | 1d12: ","")}{if(json.get(MaxHitDice,"1d12")>0,json.get(MaxHitDice,"1d12"),"")}{if(json.get(MaxHitDice,"1d10")>0," | 1d10: ","")}{if(json.get(MaxHitDice,"1d10")>0,json.get(MaxHitDice,"1d10"),"")}{if(json.get(MaxHitDice,"1d8")>0," | 1d8: ","")}{if(json.get(MaxHitDice,"1d8")>0,json.get(MaxHitDice,"1d8"),"")}{if(json.get(MaxHitDice,"1d6")>0," | 1d6: ","")}{if(json.get(MaxHitDice,"1d6")>0,json.get(MaxHitDice,"1d6"),"")} |
+*dAC (AC):{AC}
+*dResistance (Resistance):{Resistance}{FiendishResilience}
+*dImmunity (Immunity):{Immunity}
+*dSpeed (Speed):{Speed}{SpeedSpecial}
+*dVision (Vision):{Vision}
+*dPassivePerception (Passive Perception):{10+Wis+(Proficiency*json.get(Skills,"Pcp"))+if(json.get(Feats,"Observant")==1,5,0)}
+*dPassiveInvestigation (Passive Investigation):{10+Int+(Proficiency*json.get(Skills,"Ins"))+if(json.get(Feats,"Observant")==1,5,0)}
+*dConcentration (Concentration):{Concentration}
+*dSpellSlots (Spell Slots):{if(or(LSpellSlots>0,json.get(LClass,"LWlk")>0),json.get(SpellSlots,"1")+"/"+json.get(SpellSlots,"2")+"/"+json.get(SpellSlots,"3")+"/"+json.get(SpellSlots,"4")+"/"+json.get(SpellSlots,"5")+"/"+json.get(SpellSlots,"6")+"/"+json.get(SpellSlots,"7")+"/"+json.get(SpellSlots,"8")+"/"+json.get(SpellSlots,"9")+"/ W:"+json.get(SpellSlots,"W"),"")}
+*dNarrativePower (Narrative Power):{NarrativePowerS+NarrativePowerL-1}
+__________:__________
+__RACIAL ABILITIES__:__________
+*BreathWeapon (Breath Weapon)
+RelentlessEndurance
+HECantrip
+dFaerieFire
+tHellishRebuke
+dtDarkness
+*Shifts
+NarrativePowerS:1
+NarrativePowerL:1
+*Foretelling
+__CLASS ABILITIES__:__________
+FightingStyle:{"Achy":0,"Defn":0,"Duel":0,"GWFt":0,"Prot":0,"2WFt":0}
+*ChannelDivinity (Channel Divinity)
+MaxChannelDivinity:{if(or(json.get(LClass,"LClc")>0,json.get(LClass,"LPdn")>=3),1,0)+if(json.get(LClass,"LClc")>5,1,0)+if(json.get(LClass,"LClc")>17,1,0)}
+__BARBARIAN__:__________
+BrbPath:{"Brsk":0,"Totm":0,"Slyr":0}
+*Rages
+MaxRages:{if(json.get(LClass,"LBrb")>0,2,0)+if(json.get(LClass,"LBrb")>2,1,0)+if(json.get(LClass,"LBrb")>5,1,0)+if(json.get(LClass,"LBrb")>11,1,0)+if(json.get(LClass,"LBrb")>16,1,0)+if(json.get(LClass,"LBrb")>19,993,0)}
+RageDmg:{if(getState("Rage")==1,Max(ceiling((json.get(LClass,"LBrb")-1)/7)+1,2),0)}
+Relentless:0
+TotemSpirit:{"Bear1":0,"Eagle1":0,"Wolf1":0,"Bear2":0,"Eagle2":0,"Wolf2":0,"Bear3":0,"Eagle3":0,"Wolf3":0}
+__BARD__:__________
+BrdCollege:{"Lore":0,"Vlor":0}
+*BardicInspiration (Bardic Inspirations)
+MaxBardicInspiration:{if(json.get(LClass,"LBrd")>0,max(1,Cha),0)}
+MagicalSecrets:[0,0,0,0,0,0,0,0]
+__CLERIC__:__________
+ClcDomain:{"Knwg":0,"Life":0,"Lght":0,"Ntur":0,"Tmpt":0,"Trky":0,"War":0,"Odr":0}
+DomainSpells:[0,0,0,0,0,0,0,0,0,0]
+DivineIntervention:0
+DomainAbility:0
+MaxDomainAbility:{if(or(json.get(ClcDomain,"Lght")==1,json.get(ClcDomain,"Tmpt")==1,json.get(ClcDomain,"War")==1),max(Wis,1),0)}
+*Warding Flare:{if(json.get(ClcDomain,"Lght")==1,DomainAbility,"")}
+*Wrath of the Storm:{if(json.get(ClcDomain,"Tmpt")==1,DomainAbility,"")}
+*War Priest:{if(json.get(ClcDomain,"War")==1,DomainAbility,"")}
+__DRUID__:__________
+DrdCircle:{"Land":0,"Moon":0,"Drms":0}
+CircleSpells:[0,0,0,0,0,0,0,0]
+*WildShapes (Wild Shapes)
+MaxWildShapes:{if(json.get(LClass,"LDrd")>=2,2,0)+if(json.get(LClass,"LDrd")>=20,997,0)}
+*CurShape (Current Shape)
+ShapesKnown
+ShapesData
+WSRetainedStats:{"WildShape":0,"Strength":0,"Dexterity":0,"Constitution":0,"HP":0,"Size":0,"TokenImage":0}
+*NaturalRecovery (Natural Recovery)
+*BalmSummerCourt (Balm of the Summer Court)
+HiddenPathsA:0
+HiddenPathsS:0
+*HPCooldownA (Hidden Path (ally) CD):{if(HiddenPathsA>0,max(HiddenPathsA-getInitiativeRound(),0) + " rounds","")}
+*HPCooldownS (Hidden Path (self) CD):{if(HiddenPathsS>0,max(HiddenPathsS-getInitiativeRound(),0) + " rounds","")}
+*PurifyingLight (Purifying Light)
+__FIGHTER__:__________
+FtrArchetype:{"Chmp":0,"BtMr":0,"ErKn":0}
+*SecondWind (Second Wind)
+*ActionSurge (Action Surge)
+*Indomitable
+*SuperiorityDice (Superiority Dice)
+*WeaponBond (Weapon Bond)
+__MONK__:__________
+MnkTradition:{"OpHd":0,"Shdw":0,"4Ele":0,"Knsi":0}
+*Ki
+MaxKi:{if(json.get(LClass,"LMnk")>=2,json.get(LClass,"LMnk"),"")}
+WholenessOfBody
+*SharpenTheBlade
+__PALADIN__:__________
+PdnOath:{"Dvtn":0,"Anct":0,"Vgnc":0}
+*DivineSense (Divine Sense)
+DivineSenseMax:{if(json.get(LClass,"LPdn")>=1,1+Cha,"")}
+*LayOnHands (Lay on Hands)
+LayOnHandsMax:{json.get(LClass,"LPdn")*5}
+OathSpells:[0,0,0,0,0,0,0,0,0,0]
+*CleansingTouch (Cleansing Touch)
+MaxCleansingTouch:{if(json.get(LClass,"LPdn")>=14,max(Cha,1),"")}
+*HolyNimbus (Holy Nimbus)
+*UndyingSentinel (Undying Sentinel)
+*ElderChampion (Elder Champion)
+*AvengingAngel (Avenging Angel)
+__RANGER__:__________
+RgrArchetype:{"Hntr":0,"BMtr":0}
+FavoredEnemy
+NaturalExplorer
+__ROGUE__:__________
+RogArchetype:{"Thif":0,"Assn":0,"ATrk":0,"Psnr":0,"Inqr":0,"Scot":0}
+*StrokeOfLuck (Stroke of Luck)
+*SpellThief (SpellThief)
+__SORCERER__:__________
+ScrOrigin:{"DrcB":0,"WldM":0}
+DraconicAncestry
+*SorceryPoints (Sorcery Points)
+MaxSorceryPoints:{if(json.get(LClass,"LScr")>=2,json.get(LClass,"LScr"),"")}
+TidesOfChaos
+__WARLOCK__:__________
+WlkPatron:{"ArcF":0,"Fend":0,"GtO1":0,"HexB":0}
+WlkPact:{"Chn":0,"Bld":0,"Tom":0}
+PatronSpells:[0,0,0,0,0,0,0,0,0,0]
+WSpellLevel:{min(ceiling(json.get(LClass,"LWlk")/2),5)}
+EInvocations:{"AgB":0,"AoS":0,"ASt":0,"BSp":0,"BIf":0,"BwW":0,"BAS":0,"CoC":0,"DSt":0,"DrW":0,"ESt":0,"ESp":0,"ERK":0,"FVg":0,"G2M":0,"Ldk":0,"MMF":0,"MyF":0,"MoC":0,"MtM":0,"MtV":0,"OwS":0,"OwL":0,"RpB":0,"SoF":0,"SIO":0,"TFF":0,"TgB":0,"VDR":0,"VCM":0,"WoG":0,"WSt":0}
+EISpells:{"BwW":0,"DrW":0,"MoC":0,"MtM":0,"SoF":0,"SIO":0,"TFF":0}
+*MundanePactWeapon (Pact Weapon)
+*MagicalPactWeapon (Pact Weapon)
+BookOfShadows
+MysticArcanum:{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0}
+*dMysticArcanum (Mystic Arcanum):{if(json.get(LClass,"LWlk")>=11,json.get(MysticArcanum,"6")+"/"+json.get(MysticArcanum,"7")+"/"+json.get(MysticArcanum,"8")+"/"+json.get(MysticArcanum,"9"),"")}
+*EldritchMaster (Eldritch Master)
+*FeyPresence (Fey Presence)
+*MistyEscape (Misty Escape)
+*DarkDelirium (Dark Delirium)
+*DarkOnesOwnLuck (Dark Ones Own Luck)
+FiendishResilience
+*HurlThroughHell (Hurl Though Hell)
+*EntropicWard (Entropic Ward)
+*HBCurse (Hexblade Curse)
+__WIZARD__:__________
+WizTradition:{"Abjr":0,"Cnjr":0,"Dvnt":0,"Ench":0,"Evoc":0,"Illn":0,"Ncrm":0,"Trmt":0}
+UnbreakableConcentration:0
+*ArcaneRecovery (Arcane Recovery)
+SpellMastery:[0,0]
+SignatureSpells:{1:{"Name":"","Use":0},2:{"Name":"","Use":0}}
+*BenignTransposition (Benign Transposition)
+ArcaneWard:{"HP":0,"Active":0,"Use":0}
+*Portent
+ThirdEye:{"Use":0,"Choice":""}
+*dThirdEye (The Third Eye):{if(json.get(ThirdEye,"Choice")=="","",json.get(ThirdEye,"Choice"))}
+*Overchannel
+*IllusorySelf (Illusory Self)
+*Shapechanger
+__FEATS__:__________
+Feats:{"Alert":0,"Athlete":0,"Actor":0,"Charger":0,"CrossbowExpert":0,"DefensiveDuelist":0,"DualWielder":0,"DungeonDelver":0,"Durable":0,"ElementalAdept":0,"Grappler":0,"GreatWeaponMaster":0,"Healer":0,"HeavilyArmored":0,"HeavyArmorMaster":0,"InspiringLeader":0,"KeenMind":0,"LightlyArmored":0,"Linguist":0,"Lucky":0,"MageSlayer":0,"MagicInitiate":0,"MartialAdept":0,"MasterOfPoisons":0,"MediumArmorMaster":0,"Mobile":0,"ModeratelyArmored":0,"MountedCombatant":0,"Observant":0,"PolearmMaster":0,"Resilient":0,"RitualCaster":0,"SavageAttacker":0,"Sentinel":0,"Sharpshooter":0,"ShieldMaster":0,"Skilled":0,"Skulker":0,"SpellSniper":0,"TavernBrawler":0,"Tough":0,"WarCaster":0,"WeaponMaster":0,"GreaterDragonmark":0,"AberrantDragonmark":0}
+*Luck
+ElementalAdept
+__MISC__:__________
+Misc1
+Misc2
+Misc3
+Misc4
+Misc5
+*Madness
+*Weight

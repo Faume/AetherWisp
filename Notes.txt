@@ -1,0 +1,30 @@
+Races
+    Changeling
+    Dragonborn
+    Dwarf
+    Elf
+    Gnome
+    Goblinoid
+    Half-Elf
+    Half-Orc
+    Halfling
+    Human
+    Kalashtar
+    Shifter
+    Tiefling
+    Warforged
+
+Classes
+    Artificer
+    Barbarian
+    Bard
+    Cleric
+    Druid
+    Fighter
+    Monk
+    Paladin
+    Ranger
+    Rogue
+    Sorcerer
+    Warlock
+    Wizard
