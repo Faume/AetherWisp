@@ -1,0 +1,34 @@
+Misc
+    Initiative
+    Concentrating
+Buff
+    Blessed
+    Haste
+    Invisible
+    Frenzy
+    Rage
+    Shifting
+    Polymorph
+Debuff
+    Blinded
+    Charmed
+    Deafened
+    Frightened
+    Grabbed
+    Incapacitated
+    Paralyzed
+    Petrified
+    Poisoned
+    Prone
+    Restrained
+    Stunned
+    Unconscious
+Health
+    Bloodied
+    Dying
+    Dead
+    Exhaustion 1,2,3,4,5
+Targeted
+    Cursed
+    Marked
+    Quarry
