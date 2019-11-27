@@ -10,6 +10,7 @@ Races
     Halfling
     Human
     Kalashtar
+    Orc
     Shifter
     Tiefling
     Warforged
