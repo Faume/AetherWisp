@@ -118,7 +118,7 @@ BrdCollege:{"Lore":0,"Vlor":0,"Glam":0,"Swrd":0,"Wspr":0}
 MaxBardicInspiration:{if(json.get(LClass,"LBrd")>0,max(1,Cha),0)}
 MagicalSecrets:[0,0,0,0,0,0,0,0]
 __CLERIC__:__________
-ClcDomain:{"Knwg":0,"Life":0,"Lght":0,"Ntur":0,"Tmpt":0,"Trky":0,"War":0,"Forg":0,"Grav":0,"Arcn":0}
+ClcDomain:{"Knwg":0,"Life":0,"Lght":0,"Ntur":0,"Tmpt":0,"Trky":0,"War":0,"Odr":0,"Forg":0,"Grav":0,"Arcn":0}
 DomainSpells:[0,0,0,0,0,0,0,0,0,0]
 DivineIntervention:0
 DomainAbility:0
@@ -218,7 +218,7 @@ ThirdEye:{"Use":0,"Choice":""}
 *IllusorySelf (Illusory Self)
 *Shapechanger
 __FEATS__:__________
-Feats:{"Alert":0,"Athlete":0,"Actor":0,"Charger":0,"CrossbowExpert":0,"DefensiveDuelist":0,"DualWielder":0,"DungeonDelver":0,"Durable":0,"ElementalAdept":0,"Grappler":0,"GreatWeaponMaster":0,"Healer":0,"HeavilyArmored":0,"HeavyArmorMaster":0,"InspiringLeader":0,"KeenMind":0,"LightlyArmored":0,"Linguist":0,"Lucky":0,"MageSlayer":0,"MagicInitiate":0,"MartialAdept":0,"MasterOfPoisons":0,"MediumArmorMaster":0,"Mobile":0,"ModeratelyArmored":0,"MountedCombatant":0,"Observant":0,"PolearmMaster":0,"Resilient":0,"RitualCaster":0,"SavageAttacker":0,"Sentinel":0,"Sharpshooter":0,"ShieldMaster":0,"Skilled":0,"Skulker":0,"SpellSniper":0,"TavernBrawler":0,"Tough":0,"WarCaster":0,"WeaponMaster":0,"AberrantDragonmark":0,"DragonFear":0,"DragonHide":0,"DwarvenFortitude":0,"SquatNimbleness":0,"ElvenAccuracy":0,"DrowHighMagic":0,"FeyTeleportation":0,"WoodElfMagic":0,"FadeAway":0,"Prodigy":0,"OrcishFury":0,"BountifulLuck":0,"SecondChance":0,"FlamesofPhlegethos":0,"InfernalConstitution":0}
+Feats:{"Alert":0,"Athlete":0,"Actor":0,"Charger":0,"CrossbowExpert":0,"DefensiveDuelist":0,"DualWielder":0,"DungeonDelver":0,"Durable":0,"ElementalAdept":0,"Grappler":0,"GreatWeaponMaster":0,"Healer":0,"HeavilyArmored":0,"HeavyArmorMaster":0,"InspiringLeader":0,"KeenMind":0,"LightlyArmored":0,"Linguist":0,"Lucky":0,"MageSlayer":0,"MagicInitiate":0,"MartialAdept":0,"MasterOfPoisons":0,"MediumArmorMaster":0,"Mobile":0,"ModeratelyArmored":0,"MountedCombatant":0,"Observant":0,"PolearmMaster":0,"Resilient":0,"RitualCaster":0,"SavageAttacker":0,"Sentinel":0,"Sharpshooter":0,"ShieldMaster":0,"Skilled":0,"Skulker":0,"SpellSniper":0,"TavernBrawler":0,"Tough":0,"WarCaster":0,"WeaponMaster":0,"AberrantDragonmark":0,"DragonFear":0,"DragonHide":0,"DwarvenFortitude":0,"SquatNimbleness":0,"ElvenAccuracy":0,"DrowHighMagic":0,"FeyTeleportation":0,"WoodElfMagic":0,"FadeAway":0,"Prodigy":0,"OrcishFury":0,"BountifulLuck":0,"SecondChance":0,"FlamesOfPhlegethos":0,"InfernalConstitution":0}
 *Luck
 ElementalAdept
 __MISC__:__________
